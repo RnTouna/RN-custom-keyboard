@@ -4,6 +4,9 @@
 #import "React/RCTBridge+Private.h"
 #import "React/RCTUIManager.h"
 
+#define UI_IS_IPHONE            ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
+#define UI_IS_IPHONEX           (UI_IS_IPHONE && [[UIScreen mainScreen] bounds].size.height == 812.0)
+
 @implementation RNCustomKeyboard
 
 @synthesize bridge = _bridge;
@@ -22,7 +25,9 @@ RCT_EXPORT_METHOD(install:(nonnull NSNumber *)reactTag withType:(nonnull NSStrin
       @"type": keyboardType
     }
   ];
-  inputView.frame = CGRectMake(-1000, -1000, 0, 252);
+    int disTance = UI_IS_IPHONEX ? (252 + 34) : 252;
+  //inputView.frame = CGRectMake(-1000, -1000, 0, 252);
+    inputView.frame = CGRectMake(0, -disTance, 0,disTance);
   UITextView *view = (UITextView*)[_bridge.uiManager viewForReactTag:reactTag];
   view = [self getRealTextView:view];
   view.inputView = inputView;
