@@ -1,4 +1,5 @@
 
+
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import {
@@ -29,6 +30,8 @@ export {
 
 const keyboardTypeRegistry = {}
 
+let confirmOnClick = null
+
 export function register(type, factory) {
   keyboardTypeRegistry[type] = factory
 }
@@ -37,12 +40,12 @@ class CustomKeyboardContainer extends Component {
   render() {
     const {tag, type} = this.props
     const factory = keyboardTypeRegistry[type]
-    if (!factory) {
+    if (!factory && __DEV__) {
       console.warn(`Custom keyboard type ${type} not registered.`)
       return null
     }
     const Comp = factory()
-    return <Comp tag={tag} />
+    return <Comp tag={tag} confirmOnClick={()=>{ if (confirmOnClick) confirmOnClick() }}/>
   }
 }
 
@@ -69,6 +72,7 @@ export class CustomTextInput extends Component {
         }
       });
     }
+    confirmOnClick = this.props.confirmOnClick
   }
 
   hideCustomKeyboard() {
