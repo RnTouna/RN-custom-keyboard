@@ -40,8 +40,10 @@ class CustomKeyboardContainer extends Component {
   render() {
     const {tag, type} = this.props
     const factory = keyboardTypeRegistry[type]
-    if (!factory && __DEV__) {
-      console.warn(`Custom keyboard type ${type} not registered.`)
+    if (!factory) {
+      if(__DEV__) {
+        console.warn(`Custom keyboard type ${type} not registered.`)
+      }
       return null
     }
     const Comp = factory()
