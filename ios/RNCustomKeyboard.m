@@ -5,7 +5,7 @@
 #import "React/RCTUIManager.h"
 
 #define UI_IS_IPHONE            ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
-#define UI_IS_IPHONEX           (UI_IS_IPHONE && [[UIScreen mainScreen] bounds].size.height == 812.0)
+#define UI_IS_IPHONEX           (UI_IS_IPHONE && ([[UIScreen mainScreen] bounds].size.height == 812.0) || [[UIScreen mainScreen] bounds].size.height == 896.0)
 
 @implementation RNCustomKeyboard
 
