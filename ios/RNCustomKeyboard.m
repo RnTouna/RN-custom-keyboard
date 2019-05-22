@@ -19,7 +19,7 @@ RCT_EXPORT_MODULE(CustomKeyboard)
 
 RCT_EXPORT_METHOD(install:(nonnull NSNumber *)reactTag withType:(nonnull NSString *)keyboardType)
 {
-  UIView* inputView = [[RCTRootView alloc] initWithBridge:((RCTBatchedBridge *)_bridge).parentBridge moduleName:@"CustomKeyboard" initialProperties:
+  UIView* inputView = [[RCTRootView alloc] initWithBridge:(_bridge).parentBridge moduleName:@"CustomKeyboard" initialProperties:
     @{
       @"tag": reactTag,
       @"type": keyboardType
